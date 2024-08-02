@@ -7,7 +7,7 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="userData.UserName"
+            [(ngModel)]="userData.Username"
             placeholder="Username"
             type="text"
             name="Username"
@@ -27,7 +27,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button (click)="loginUser()" color="primary">
+      <button mat-raised-button (click)="openUserLoginDialog()" color="primary">
         Login
       </button>
     </mat-card-actions>

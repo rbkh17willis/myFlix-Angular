@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
     styleUrl: './user-login-form.component.scss'
 })
 export class UserLoginFormComponent implements OnInit {
-    @Input() userData = { username: "", password: "" };
+    @Input() userData = { Username: "", Password: "" };
 
     constructor(
         public fetchApiData: UserRegistrationService,
@@ -22,19 +22,20 @@ export class UserLoginFormComponent implements OnInit {
     
     ngOnInit(): void {}
 
-    logInUser() : void {
+    openUserLoginDialog() : void {
         this.fetchApiData.userLogin(this.userData).subscribe(res => {
             this.dialogRef.close();
-            this.snackBar.open(`Login success, Welcom ${res.user.username}`, "OK", {
+            this.snackBar.open(`Login success, Welcome ${res.user.Username}`, "OK", {
                 duration: 2000
             });
             let user = {
                 ...res.user,
                 id: res.user._id,
-                password: this.userData.password,
+                password: this.userData.Password,
                 token: res.token
             }
             localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("token", res.token);
             this.router.navigate(["movies"]);
         }, res => {
             this.snackBar.open("Login fail", "OK", {
