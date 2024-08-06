@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,10 +10,11 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   userData: any = {};
-  favoriteMovies: any[] = [];
+  FavoriteMovies: any[] = [];
   constructor(
     public fetchApiData: UserRegistrationService,
-    public router: Router
+    public router: Router,
+    public dialog: MatDialog
   ) {
     this.userData = JSON.parse(localStorage.getItem("user") || "");
   }
@@ -44,8 +46,8 @@ export class UserProfileComponent implements OnInit {
 
   getfavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((res: any) => {
-      this.favoriteMovies = res.filter((movie: any) => {
-        return this.userData.favoriteMovies.includes(movie._id)
+      this.FavoriteMovies = res.filter((movie: any) => {
+        return this.userData.FavoriteMovies.includes(movie._id)
       })
     }, (err: any) => {
       console.error(err);
@@ -67,7 +69,7 @@ export class UserProfileComponent implements OnInit {
 
   removeFromFavorite(movie: any): void {
     this.fetchApiData.deleteFavoriteMovies(this.userData.id, movie.title).subscribe((res: any) => {
-      this.userData.favoriteMovies = res.favoriteMovies;
+      this.userData.FavoriteMovies = res.FavoriteMovies;
       this.getfavoriteMovies();
     }, (err: any) => {
       console.error(err)
