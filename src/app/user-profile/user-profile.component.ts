@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+//added in MatDialog to see if that was the issue, didn't make a difference on error
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -14,6 +15,7 @@ export class UserProfileComponent implements OnInit {
   constructor(
     public fetchApiData: UserRegistrationService,
     public router: Router,
+    //added in dialog to see if it fixed error
     public dialog: MatDialog
   ) {
     this.userData = JSON.parse(localStorage.getItem("user") || "");
