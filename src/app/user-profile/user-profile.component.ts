@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUser();
+    this.getfavoriteMovies();
   }
 
   updateUser(): void {
@@ -56,21 +56,8 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  getUser(): void {
-    this.fetchApiData.getUser(this.userData.id).subscribe((res: any) => {
-      this.userData = {
-        ...res,
-        id: res._id,
-        password: this.userData.password,
-        token: this.userData.token
-      };
-      localStorage.setItem("user", JSON.stringify(this.userData));
-      this.getfavoriteMovies();
-    })
-  }
-
   removeFromFavorite(movie: any): void {
-    this.fetchApiData.deleteFavoriteMovies(this.userData.id, movie.title).subscribe((res: any) => {
+    this.fetchApiData.deleteFavoriteMovies(this.userData.Username, movie.Title).subscribe((res: any) => {
       this.userData.FavoriteMovies = res.FavoriteMovies;
       this.getfavoriteMovies();
     }, (err: any) => {
