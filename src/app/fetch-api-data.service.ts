@@ -112,7 +112,7 @@ export class UserRegistrationService {
 
   // Making the api call for the Add a Movie to FavoriteMovies endpoint
   addFavoriteMovies(username: string, movieID: string, user:any): Observable<any> {
-    const token = user.token;
+    const token = localStorage.getItem("token");
     console.log(token);
     return this.http.post(apiUrl + 'users/' + username + '/movies/' + movieID, {}, {headers: new HttpHeaders(
       {
