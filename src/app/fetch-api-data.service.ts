@@ -10,9 +10,10 @@ const apiUrl = 'https://moviesapi-o4y1.onrender.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRegistrationService {
-  // Inject the HttpClient module to the constructor params
+// Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
+export class UserRegistrationService {
+  
   constructor(private http: HttpClient) {
   }
   // Making the api call for the user registration endpoint
